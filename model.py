@@ -753,8 +753,27 @@ def hit_rate_at_k(retrieved_ids_per_query, relevant_ids_per_query, k):
 
     return float(hits / len(retrieved_ids_per_query))
 
-# Step 43 - recall_at_k (not yet solved)
-# TODO: implement
+# Step 43 - recall_at_k
+def recall_at_k(retrieved_ids_per_query, relevant_ids_per_query, k):
+    if not retrieved_ids_per_query:
+        return 0.0
+
+    recalls = []
+
+    for retrieved, relevant in zip(
+        retrieved_ids_per_query,
+        relevant_ids_per_query,
+    ):
+        if not relevant:
+            recalls.append(0.0)
+            continue
+
+        top_k = set(retrieved[:k])
+        found = sum(chunk_id in top_k for chunk_id in relevant)
+
+        recalls.append(found / len(relevant))
+
+    return float(sum(recalls) / len(recalls))
 
 # Step 44 - mean_reciprocal_rank (not yet solved)
 # TODO: implement
