@@ -441,8 +441,10 @@ def track_source_chunk_ids(source_chunks):
         if "id" in chunk
     ]
 
-# Step 32 - append_source_references (not yet solved)
-# TODO: implement
+# Step 32 - append_source_references
+def append_source_references(answer_text, source_chunks):
+    ids = track_source_chunk_ids(source_chunks)
+    return answer_text + "\nSources: [" + ", ".join(ids) + "]"
 
 # Step 33 - query_rewrite (not yet solved)
 # TODO: implement
