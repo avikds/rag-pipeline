@@ -81,8 +81,19 @@ def chunk_fixed_size(text, chunk_size):
         for i in range(0, len(text), chunk_size)
     ]
 
-# Step 7 - chunk_by_tokens (not yet solved)
-# TODO: implement
+# Step 7 - chunk_by_tokens
+def chunk_by_tokens(text, tokenizer, max_tokens):
+    if not text:
+        return []
+
+    token_ids = tokenizer.encode(text)
+
+    chunks = []
+    for i in range(0, len(token_ids), max_tokens):
+        chunk_ids = token_ids[i:i + max_tokens]
+        chunks.append(tokenizer.decode(chunk_ids))
+
+    return chunks
 
 # Step 8 - chunk_by_sentences (not yet solved)
 # TODO: implement
