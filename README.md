@@ -35,7 +35,7 @@ python scaffold.py
 - [x] **23.** save_faiss_index
 - [x] **24.** build_prompt_template
 - [x] **25.** format_context
-- [ ] **26.** truncate_context
+- [x] **26.** truncate_context
 - [ ] **27.** add_system_instruction
 - [ ] **28.** load_generator
 - [ ] **29.** generate_answer
