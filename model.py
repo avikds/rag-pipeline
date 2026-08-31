@@ -263,8 +263,15 @@ def retrieve(query, model, chunk_matrix, chunks, k):
     # Return the top-k chunks with their similarity scores.
     return top_k_chunks(scores, chunks, k)
 
-# Step 20 - build_faiss_index (not yet solved)
-# TODO: implement
+# Step 20 - build_faiss_index
+def build_faiss_index(chunk_matrix):
+    import faiss
+
+    dimension = chunk_matrix.shape[1]
+    index = faiss.IndexFlatIP(dimension)
+    index.add(chunk_matrix)
+
+    return index
 
 # Step 21 - faiss_search (not yet solved)
 # TODO: implement
