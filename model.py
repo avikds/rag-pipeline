@@ -800,16 +800,19 @@ def mean_reciprocal_rank(retrieved_ids_per_query, relevant_ids_per_query):
 
 # Step 45 - faithfulness_score
 def faithfulness_score(answer, context_chunks):
-    answer_tokens = normalize_text(answer).lower().split()
+    import re
 
-    if not answer_tokens:
-        return 0.0
-
+    answer_text = normalize_text(answer).lower()
     context_text = " ".join(
         normalize_text(chunk["text"]).lower()
         for chunk in context_chunks
     )
-    context_tokens = set(context_text.split())
+
+    answer_tokens = re.findall(r"\b\w+\b", answer_text)
+    context_tokens = set(re.findall(r"\b\w+\b", context_text))
+
+    if not answer_tokens:
+        return 0.0
 
     supported = sum(
         token in context_tokens
