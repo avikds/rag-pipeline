@@ -326,8 +326,15 @@ def build_prompt_template():
         "Answer the question using only the provided context."
     )
 
-# Step 25 - format_context (not yet solved)
-# TODO: implement
+# Step 25 - format_context
+def format_context(retrieved):
+    if not retrieved:
+        return ""
+
+    return "\n".join(
+        f"[{i}] {chunk['text']} (source={chunk['source']})"
+        for i, (chunk, score) in enumerate(retrieved, start=1)
+    )
 
 # Step 26 - truncate_context (not yet solved)
 # TODO: implement
