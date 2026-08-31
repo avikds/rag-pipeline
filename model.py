@@ -308,8 +308,13 @@ def compare_faiss_to_numpy(query_vector, chunk_matrix, index, k):
     # Compare the selected indices as sets.
     return set(numpy_indices.tolist()) == set(faiss_indices.tolist())
 
-# Step 23 - save_faiss_index (not yet solved)
-# TODO: implement
+# Step 23 - save_faiss_index
+def save_faiss_index(index, path):
+    """Write `index` to `path` and return the index loaded back from disk."""
+    import faiss
+
+    faiss.write_index(index, path)
+    return faiss.read_index(path)
 
 # Step 24 - build_prompt_template (not yet solved)
 # TODO: implement
