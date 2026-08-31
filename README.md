@@ -45,7 +45,7 @@ python scaffold.py
 - [x] **33.** query_rewrite
 - [x] **34.** hyde_retrieve
 - [x] **35.** reciprocal_rank_fusion
-- [ ] **36.** bm25_search
+- [x] **36.** bm25_search
 - [ ] **37.** hybrid_search
 - [ ] **38.** rerank_cross_encoder
 - [ ] **39.** maximal_marginal_relevance

@@ -503,8 +503,66 @@ def reciprocal_rank_fusion(ranked_lists, k=60):
         key=lambda item: (-item[1], item[0])
     )
 
-# Step 36 - bm25_search (not yet solved)
-# TODO: implement
+# Step 36 - bm25_search
+def bm25_search(query, chunks, k=5, k1=1.5, b=0.75):
+    import math
+    from collections import Counter
+
+    query_terms = query.lower().split()
+    documents = [
+        chunk["text"].lower().split()
+        for chunk in chunks
+    ]
+
+    if not documents or not query_terms:
+        return []
+
+    n_docs = len(documents)
+    doc_lengths = [len(doc) for doc in documents]
+    avgdl = sum(doc_lengths) / n_docs if n_docs else 0.0
+
+    # Document frequency for each unique query term.
+    df = {}
+    for term in set(query_terms):
+        df[term] = sum(1 for doc in documents if term in doc)
+
+    # Standard BM25 IDF variant specified in the prompt.
+    idf = {
+        term: math.log(
+            (n_docs - freq + 0.5) / (freq + 0.5) + 1.0
+        )
+        for term, freq in df.items()
+    }
+
+    results = []
+
+    for i, doc in enumerate(documents):
+        if not doc:
+            continue
+
+        term_freqs = Counter(doc)
+        score = 0.0
+
+        for term in query_terms:
+            if term not in term_freqs:
+                continue
+
+            tf = term_freqs[term]
+            denominator = (
+                tf
+                + k1 * (1.0 - b + b * doc_lengths[i] / avgdl)
+            )
+
+            score += idf[term] * (
+                tf * (k1 + 1.0)
+            ) / denominator
+
+        if score > 0.0:
+            results.append((i, score))
+
+    results.sort(key=lambda x: (-x[1], x[0]))
+
+    return results[:k]
 
 # Step 37 - hybrid_search (not yet solved)
 # TODO: implement
