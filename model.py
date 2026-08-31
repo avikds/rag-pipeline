@@ -13,8 +13,20 @@ def load_text_file(path):
     with open(path, "r", encoding="utf-8") as f:
         return f.read()
 
-# Step 2 - load_text_directory (not yet solved)
-# TODO: implement
+# Step 2 - load_text_directory
+def load_text_directory(directory):
+    # Find all .txt files, sort by filename for deterministic ordering,
+    # and reuse load_text_file() for reading their contents.
+    filenames = sorted(
+        filename
+        for filename in os.listdir(directory)
+        if filename.endswith(".txt")
+    )
+
+    return [
+        load_text_file(os.path.join(directory, filename))
+        for filename in filenames
+    ]
 
 # Step 3 - extract_text_from_html (not yet solved)
 # TODO: implement
