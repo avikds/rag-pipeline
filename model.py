@@ -150,8 +150,11 @@ def attach_chunk_metadata(chunks, source):
         for position, chunk in enumerate(chunks)
     ]
 
-# Step 11 - load_embedding_model (not yet solved)
-# TODO: implement
+# Step 11 - load_embedding_model
+def load_embedding_model(model_name):
+    from sentence_transformers import SentenceTransformer
+
+    return SentenceTransformer(model_name)
 
 # Step 12 - embed_text (not yet solved)
 # TODO: implement
