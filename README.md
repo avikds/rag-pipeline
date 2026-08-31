@@ -56,7 +56,7 @@ python scaffold.py
 - [x] **44.** mean_reciprocal_rank
 - [x] **45.** faithfulness_score
 - [x] **46.** relevance_score
-- [ ] **47.** handle_no_context
+- [x] **47.** handle_no_context
 - [ ] **48.** deduplicate_chunks
 - [ ] **49.** cache_query_embedding
 - [ ] **50.** update_chat_memory
