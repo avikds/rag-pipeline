@@ -15,6 +15,8 @@ def load_text_file(path):
 
 # Step 2 - load_text_directory
 def load_text_directory(directory):
+    import os
+    
     # Find all .txt files, sort by filename for deterministic ordering,
     # and reuse load_text_file() for reading their contents.
     filenames = sorted(
