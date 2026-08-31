@@ -700,8 +700,17 @@ def maximal_marginal_relevance(
 
     return selected
 
-# Step 40 - filter_by_metadata (not yet solved)
-# TODO: implement
+# Step 40 - filter_by_metadata
+def filter_by_metadata(chunks, filter_dict):
+    return [
+        chunk
+        for chunk in chunks
+        if all(
+            key in chunk.get("metadata", {})
+            and chunk["metadata"][key] == value
+            for key, value in filter_dict.items()
+        )
+    ]
 
 # Step 41 - build_eval_set (not yet solved)
 # TODO: implement
