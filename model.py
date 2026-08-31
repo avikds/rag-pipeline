@@ -446,8 +446,36 @@ def append_source_references(answer_text, source_chunks):
     ids = track_source_chunk_ids(source_chunks)
     return answer_text + "\nSources: [" + ", ".join(ids) + "]"
 
-# Step 33 - query_rewrite (not yet solved)
-# TODO: implement
+# Step 33 - query_rewrite
+def query_rewrite(raw_query):
+    import re
+
+    # Reuse normalize_text() for Unicode normalization and whitespace cleanup.
+    query = normalize_text(raw_query).lower()
+
+    # Remove common conversational filler prefixes, including combinations.
+    filler_patterns = [
+        r"^(?:please\s+)+",
+        r"^(?:(?:please\s+)?(?:could|can)\s+you\s+)+",
+        r"^(?:(?:please\s+)?tell\s+me\s+)+",
+        r"^(?:(?:please\s+)?i\s+want\s+to\s+know\s+)+",
+    ]
+
+    for pattern in filler_patterns:
+        query = re.sub(pattern, "", query)
+
+    # Repeatedly remove filler prefixes to handle combinations such as
+    # "please tell me" and "could you please".
+    previous = None
+    while query != previous:
+        previous = query
+        for pattern in filler_patterns:
+            query = re.sub(pattern, "", query)
+
+    # Remove trailing sentence/question punctuation.
+    query = re.sub(r"[?!.]+$", "", query).strip()
+
+    return query
 
 # Step 34 - hyde_retrieve (not yet solved)
 # TODO: implement
