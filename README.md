@@ -33,7 +33,7 @@ python scaffold.py
 - [x] **21.** faiss_search
 - [x] **22.** compare_faiss_to_numpy
 - [x] **23.** save_faiss_index
-- [ ] **24.** build_prompt_template
+- [x] **24.** build_prompt_template
 - [ ] **25.** format_context
 - [ ] **26.** truncate_context
 - [ ] **27.** add_system_instruction

@@ -316,8 +316,15 @@ def save_faiss_index(index, path):
     faiss.write_index(index, path)
     return faiss.read_index(path)
 
-# Step 24 - build_prompt_template (not yet solved)
-# TODO: implement
+# Step 24 - build_prompt_template
+def build_prompt_template():
+    return (
+        "Context:\n"
+        "{context}\n\n"
+        "Question:\n"
+        "{question}\n\n"
+        "Answer the question using only the provided context."
+    )
 
 # Step 25 - format_context (not yet solved)
 # TODO: implement
