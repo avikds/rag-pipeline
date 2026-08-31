@@ -242,8 +242,15 @@ def top_k_indices(scores, k):
     # Stable descending sort preserves lower indices when scores are tied.
     return np.argsort(-scores, kind="stable")[:k]
 
-# Step 18 - top_k_chunks (not yet solved)
-# TODO: implement
+# Step 18 - top_k_chunks
+def top_k_chunks(scores, chunks, k):
+    # Reuse top_k_indices() to select the highest-scoring positions.
+    indices = top_k_indices(scores, k)
+
+    return [
+        (chunks[i], float(scores[i]))
+        for i in indices
+    ]
 
 # Step 19 - retrieve (not yet solved)
 # TODO: implement
