@@ -341,25 +341,16 @@ def truncate_context(context, max_chars):
     if len(context) <= max_chars:
         return context
 
-    # Find the last whitespace at or before the character budget.
-    boundary = context.rfind(" ", 0, max_chars + 1)
+    prefix = context[:max_chars]
 
-    if boundary != -1:
-        candidate = context[:boundary].rstrip()
+    # If the cut falls in the middle of a word, cut back to the
+    # previous whitespace boundary.
+    if max_chars < len(context) and not context[max_chars].isspace():
+        boundary = prefix.rfind(" ")
+        if boundary >= 0:
+            return prefix[:boundary]
 
-        # If the boundary itself would exclude a word that exactly fits,
-        # use the full prefix when it is already within the limit.
-        if len(candidate) <= max_chars:
-            remaining = context[boundary + 1:]
-            first_word = remaining.split(" ", 1)[0]
-
-            extended = candidate + " " + first_word
-            if len(extended) <= max_chars:
-                return extended
-
-        return candidate
-
-    return context[:max_chars]
+    return prefix
 
 # Step 27 - add_system_instruction (not yet solved)
 # TODO: implement
