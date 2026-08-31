@@ -564,8 +564,51 @@ def bm25_search(query, chunks, k=5, k1=1.5, b=0.75):
 
     return results[:k]
 
-# Step 37 - hybrid_search (not yet solved)
-# TODO: implement
+# Step 37 - hybrid_search
+def hybrid_search(query, chunks, embeddings, embed_model, alpha=0.5, k=5):
+    import numpy as np
+
+    # Dense cosine similarity scores.
+    query_vector = embed_text(embed_model, query)
+    dense_scores = cosine_similarity_search(query_vector, embeddings)
+
+    # BM25 lexical scores.
+    bm25_results = bm25_search(query, chunks, k=len(chunks))
+    bm25_scores = np.zeros(len(chunks), dtype=np.float32)
+
+    for idx, score in bm25_results:
+        bm25_scores[idx] = score
+
+    # Min-max normalization to [0, 1].
+    def min_max_normalize(scores):
+        scores = np.asarray(scores, dtype=np.float32)
+        if len(scores) == 0:
+            return scores
+
+        min_score = np.min(scores)
+        max_score = np.max(scores)
+
+        if max_score == min_score:
+            return np.zeros_like(scores)
+
+        return (scores - min_score) / (max_score - min_score)
+
+    dense_norm = min_max_normalize(dense_scores)
+    bm25_norm = min_max_normalize(bm25_scores)
+
+    # Blend dense and lexical signals.
+    combined_scores = (
+        alpha * dense_norm
+        + (1.0 - alpha) * bm25_norm
+    )
+
+    # Stable descending sort preserves original chunk order on ties.
+    indices = np.argsort(-combined_scores, kind="stable")[:min(k, len(chunks))]
+
+    return [
+        (int(idx), float(combined_scores[idx]))
+        for idx in indices
+    ]
 
 # Step 38 - rerank_cross_encoder (not yet solved)
 # TODO: implement
