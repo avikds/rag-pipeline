@@ -818,8 +818,23 @@ def faithfulness_score(answer, context_chunks):
 
     return float(supported / len(answer_tokens))
 
-# Step 46 - relevance_score (not yet solved)
-# TODO: implement
+# Step 46 - relevance_score
+def relevance_score(answer, question):
+    import re
+
+    answer_text = normalize_text(answer).lower()
+    question_text = normalize_text(question).lower()
+
+    answer_tokens = set(re.findall(r"\b\w+\b", answer_text))
+    question_tokens = set(re.findall(r"\b\w+\b", question_text))
+
+    if not answer_tokens and not question_tokens:
+        return 0.0
+
+    union = answer_tokens | question_tokens
+    intersection = answer_tokens & question_tokens
+
+    return float(len(intersection) / len(union))
 
 # Step 47 - handle_no_context (not yet solved)
 # TODO: implement
