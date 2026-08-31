@@ -26,7 +26,7 @@ python scaffold.py
 - [x] **14.** l2_normalize
 - [x] **15.** save_corpus
 - [x] **16.** cosine_similarity_search
-- [ ] **17.** top_k_indices
+- [x] **17.** top_k_indices
 - [ ] **18.** top_k_chunks
 - [ ] **19.** retrieve
 - [ ] **20.** build_faiss_index

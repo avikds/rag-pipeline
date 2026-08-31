@@ -233,8 +233,14 @@ def cosine_similarity_search(query_vector, chunk_matrix):
 
     return dot_products / (safe_query_norm * safe_chunk_norms)
 
-# Step 17 - top_k_indices (not yet solved)
-# TODO: implement
+# Step 17 - top_k_indices
+def top_k_indices(scores, k):
+    """Return indices of the k highest scores in descending order."""
+
+    k = min(k, len(scores))
+
+    # Stable descending sort preserves lower indices when scores are tied.
+    return np.argsort(-scores, kind="stable")[:k]
 
 # Step 18 - top_k_chunks (not yet solved)
 # TODO: implement
