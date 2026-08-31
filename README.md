@@ -25,7 +25,7 @@ python scaffold.py
 - [x] **13.** embed_chunks
 - [x] **14.** l2_normalize
 - [x] **15.** save_corpus
-- [ ] **16.** cosine_similarity_search
+- [x] **16.** cosine_similarity_search
 - [ ] **17.** top_k_indices
 - [ ] **18.** top_k_chunks
 - [ ] **19.** retrieve

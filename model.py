@@ -218,8 +218,20 @@ def save_corpus(embeddings, chunks, directory):
         "chunks": json.load(open(chunks_path, "r", encoding="utf-8")),
     }
 
-# Step 16 - cosine_similarity_search (not yet solved)
-# TODO: implement
+# Step 16 - cosine_similarity_search
+def cosine_similarity_search(query_vector, chunk_matrix):
+    """Cosine similarity between query_vector (d,) and each row of chunk_matrix (n,d)."""
+
+    query_norm = np.linalg.norm(query_vector)
+    chunk_norms = np.linalg.norm(chunk_matrix, axis=1)
+
+    # Avoid division by zero for zero vectors.
+    safe_query_norm = query_norm if query_norm != 0 else 1.0
+    safe_chunk_norms = np.where(chunk_norms == 0, 1.0, chunk_norms)
+
+    dot_products = chunk_matrix @ query_vector
+
+    return dot_products / (safe_query_norm * safe_chunk_norms)
 
 # Step 17 - top_k_indices (not yet solved)
 # TODO: implement
