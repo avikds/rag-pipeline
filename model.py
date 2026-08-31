@@ -911,6 +911,21 @@ def update_chat_memory(history, user_message, assistant_message):
         },
     ]
 
-# Step 51 - rewrite_followup (not yet solved)
-# TODO: implement
+# Step 51 - rewrite_followup
+def rewrite_followup(followup_question, history):
+    followup = normalize_text(followup_question)
+
+    # Find the most recent user message.
+    last_user_message = None
+    for turn in reversed(history):
+        if turn.get("role") == "user":
+            last_user_message = turn.get("content")
+            break
+
+    if not last_user_message:
+        return followup
+
+    previous_question = normalize_text(last_user_message)
+
+    return f"{previous_question} {followup}"
 
