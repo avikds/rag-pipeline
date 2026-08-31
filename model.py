@@ -292,8 +292,21 @@ def faiss_search(index, query_vector, k):
 
     return scores[order], indices[order]
 
-# Step 22 - compare_faiss_to_numpy (not yet solved)
-# TODO: implement
+# Step 22 - compare_faiss_to_numpy
+def compare_faiss_to_numpy(query_vector, chunk_matrix, index, k):
+    # NumPy cosine-similarity retrieval.
+    numpy_scores = cosine_similarity_search(query_vector, chunk_matrix)
+    numpy_indices = top_k_indices(numpy_scores, k)
+
+    # FAISS-style inner-product retrieval.
+    import numpy as np
+
+    q = np.asarray(query_vector, dtype=np.float32).reshape(1, -1)
+    _, faiss_indices = index.search(q, k)
+    faiss_indices = np.asarray(faiss_indices, dtype=np.int64).reshape(-1)
+
+    # Compare the selected indices as sets.
+    return set(numpy_indices.tolist()) == set(faiss_indices.tolist())
 
 # Step 23 - save_faiss_index (not yet solved)
 # TODO: implement

@@ -31,7 +31,7 @@ python scaffold.py
 - [x] **19.** retrieve
 - [x] **20.** build_faiss_index
 - [x] **21.** faiss_search
-- [ ] **22.** compare_faiss_to_numpy
+- [x] **22.** compare_faiss_to_numpy
 - [ ] **23.** save_faiss_index
 - [ ] **24.** build_prompt_template
 - [ ] **25.** format_context
