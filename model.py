@@ -128,8 +128,15 @@ def chunk_by_sentences(text, max_chars):
 
     return chunks
 
-# Step 9 - chunk_with_overlap (not yet solved)
-# TODO: implement
+# Step 9 - chunk_with_overlap
+def chunk_with_overlap(text, chunk_size, overlap):
+    step = chunk_size - overlap
+
+    chunks = []
+    for start in range(0, len(text), step):
+        chunks.append(text[start:start + chunk_size])
+
+    return chunks
 
 # Step 10 - attach_chunk_metadata (not yet solved)
 # TODO: implement
