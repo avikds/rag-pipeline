@@ -28,7 +28,7 @@ python scaffold.py
 - [x] **16.** cosine_similarity_search
 - [x] **17.** top_k_indices
 - [x] **18.** top_k_chunks
-- [ ] **19.** retrieve
+- [x] **19.** retrieve
 - [ ] **20.** build_faiss_index
 - [ ] **21.** faiss_search
 - [ ] **22.** compare_faiss_to_numpy
