@@ -22,7 +22,7 @@ python scaffold.py
 - [x] **10.** attach_chunk_metadata
 - [x] **11.** load_embedding_model
 - [x] **12.** embed_text
-- [ ] **13.** embed_chunks
+- [x] **13.** embed_chunks
 - [ ] **14.** l2_normalize
 - [ ] **15.** save_corpus
 - [ ] **16.** cosine_similarity_search
