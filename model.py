@@ -28,8 +28,33 @@ def load_text_directory(directory):
         for filename in filenames
     ]
 
-# Step 3 - extract_text_from_html (not yet solved)
-# TODO: implement
+# Step 3 - extract_text_from_html
+def extract_text_from_html(html):
+    from html.parser import HTMLParser
+
+    class VisibleTextParser(HTMLParser):
+        def __init__(self):
+            super().__init__(convert_charrefs=True)
+            self.parts = []
+            self.skip_depth = 0
+
+        def handle_starttag(self, tag, attrs):
+            if tag.lower() in {"script", "style"}:
+                self.skip_depth += 1
+
+        def handle_endtag(self, tag):
+            if tag.lower() in {"script", "style"} and self.skip_depth > 0:
+                self.skip_depth -= 1
+
+        def handle_data(self, data):
+            if self.skip_depth == 0:
+                self.parts.append(data)
+
+    parser = VisibleTextParser()
+    parser.feed(html)
+    parser.close()
+
+    return "".join(parser.parts)
 
 # Step 4 - normalize_text (not yet solved)
 # TODO: implement
