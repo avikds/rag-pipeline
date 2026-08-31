@@ -40,7 +40,7 @@ python scaffold.py
 - [x] **28.** load_generator
 - [x] **29.** generate_answer
 - [x] **30.** rag_answer
-- [ ] **31.** track_source_chunk_ids
+- [x] **31.** track_source_chunk_ids
 - [ ] **32.** append_source_references
 - [ ] **33.** query_rewrite
 - [ ] **34.** hyde_retrieve
