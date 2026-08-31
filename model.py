@@ -364,8 +364,17 @@ def add_system_instruction(prompt):
 
     return system_instruction + "\n\n" + prompt
 
-# Step 28 - load_generator (not yet solved)
-# TODO: implement
+# Step 28 - load_generator
+def load_generator(model_name="sshleifer/tiny-gpt2"):
+    from transformers import AutoModelForCausalLM, AutoTokenizer
+
+    tokenizer = AutoTokenizer.from_pretrained(model_name)
+    model = AutoModelForCausalLM.from_pretrained(model_name)
+
+    if tokenizer.pad_token is None:
+        tokenizer.pad_token = tokenizer.eos_token
+
+    return model, tokenizer
 
 # Step 29 - generate_answer (not yet solved)
 # TODO: implement
