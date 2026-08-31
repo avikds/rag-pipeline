@@ -186,8 +186,16 @@ def embed_chunks(model, chunks, batch_size=32):
 
     return np.asarray(embeddings, dtype=np.float32)
 
-# Step 14 - l2_normalize (not yet solved)
-# TODO: implement
+# Step 14 - l2_normalize
+def l2_normalize(matrix):
+    # Compute the L2 norm of each row.
+    norms = np.linalg.norm(matrix, axis=1, keepdims=True)
+
+    # Avoid division by zero for all-zero rows.
+    safe_norms = np.where(norms == 0, 1.0, norms)
+
+    # Return a new normalized array.
+    return matrix / safe_norms
 
 # Step 15 - save_corpus (not yet solved)
 # TODO: implement
