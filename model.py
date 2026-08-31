@@ -399,8 +399,39 @@ def generate_answer(model, tokenizer, prompt, max_new_tokens=32):
 
     return tokenizer.decode(new_token_ids, skip_special_tokens=True)
 
-# Step 30 - rag_answer (not yet solved)
-# TODO: implement
+# Step 30 - rag_answer
+def rag_answer(query, chunks, embeddings, embed_model, generator, tokenizer, k=3):
+    # Embed the query.
+    query_vector = embed_text(embed_model, query)
+
+    # Compute cosine similarity and retrieve the top-k chunks.
+    scores = cosine_similarity_search(query_vector, embeddings)
+    retrieved = top_k_chunks(scores, chunks, k)
+
+    # Format the retrieved chunks into the RAG prompt.
+    context = format_context(retrieved)
+    prompt_template = build_prompt_template()
+    prompt = prompt_template.format(
+        context=context,
+        question=query,
+    )
+
+    # Add the grounded system instruction.
+    prompt = add_system_instruction(prompt)
+
+    # Generate the answer.
+    answer = generate_answer(
+        generator,
+        tokenizer,
+        prompt,
+    )
+
+    # Return the answer together with the ranked source chunks.
+    return {
+        "answer": answer,
+        "sources": [chunk for chunk, score in retrieved],
+        "query": query,
+    }
 
 # Step 31 - track_source_chunk_ids (not yet solved)
 # TODO: implement
