@@ -95,8 +95,38 @@ def chunk_by_tokens(text, tokenizer, max_tokens):
 
     return chunks
 
-# Step 8 - chunk_by_sentences (not yet solved)
-# TODO: implement
+# Step 8 - chunk_by_sentences
+def chunk_by_sentences(text, max_chars):
+    import re
+
+    if not text or not text.strip():
+        return []
+
+    # Split into sentences while keeping the terminating punctuation.
+    sentences = re.findall(r"[^.!?]+[.!?]+|[^.!?]+$", text)
+
+    sentences = [sentence.strip() for sentence in sentences if sentence.strip()]
+
+    chunks = []
+    current = []
+
+    for sentence in sentences:
+        if not current:
+            current = [sentence]
+            continue
+
+        candidate = " ".join(current + [sentence])
+
+        if len(candidate) <= max_chars:
+            current.append(sentence)
+        else:
+            chunks.append(" ".join(current))
+            current = [sentence]
+
+    if current:
+        chunks.append(" ".join(current))
+
+    return chunks
 
 # Step 9 - chunk_with_overlap (not yet solved)
 # TODO: implement

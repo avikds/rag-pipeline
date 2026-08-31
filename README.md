@@ -17,7 +17,7 @@ python scaffold.py
 - [x] **5.** make_document
 - [x] **6.** chunk_fixed_size
 - [x] **7.** chunk_by_tokens
-- [ ] **8.** chunk_by_sentences
+- [x] **8.** chunk_by_sentences
 - [ ] **9.** chunk_with_overlap
 - [ ] **10.** attach_chunk_metadata
 - [ ] **11.** load_embedding_model
