@@ -51,7 +51,7 @@ python scaffold.py
 - [x] **39.** maximal_marginal_relevance
 - [x] **40.** filter_by_metadata
 - [x] **41.** build_eval_set
-- [ ] **42.** hit_rate_at_k
+- [x] **42.** hit_rate_at_k
 - [ ] **43.** recall_at_k
 - [ ] **44.** mean_reciprocal_rank
 - [ ] **45.** faithfulness_score
