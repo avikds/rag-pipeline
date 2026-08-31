@@ -436,9 +436,9 @@ def rag_answer(query, chunks, embeddings, embed_model, generator, tokenizer, k=3
 # Step 31 - track_source_chunk_ids
 def track_source_chunk_ids(source_chunks):
     return [
-        chunk["id"]
+        chunk.get("id", chunk.get("chunk_id"))
         for chunk in source_chunks
-        if "id" in chunk
+        if chunk.get("id", chunk.get("chunk_id")) is not None
     ]
 
 # Step 32 - append_source_references
