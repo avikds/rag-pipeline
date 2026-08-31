@@ -273,8 +273,24 @@ def build_faiss_index(chunk_matrix):
 
     return index
 
-# Step 21 - faiss_search (not yet solved)
-# TODO: implement
+# Step 21 - faiss_search
+def faiss_search(index, query_vector, k):
+    """Return top-k (scores, indices) as 1D arrays for a single query vector."""
+
+    query_vector = np.asarray(query_vector, dtype=np.float32).reshape(1, -1)
+
+    # Search all vectors so ties can be resolved deterministically.
+    scores, indices = index.search(query_vector, index.ntotal)
+
+    scores = np.asarray(scores, dtype=np.float32).reshape(-1)
+    indices = np.asarray(indices, dtype=np.int64).reshape(-1)
+
+    # Sort by descending score, then ascending index for ties.
+    order = np.lexsort((indices, -scores))
+
+    order = order[:min(k, len(order))]
+
+    return scores[order], indices[order]
 
 # Step 22 - compare_faiss_to_numpy (not yet solved)
 # TODO: implement

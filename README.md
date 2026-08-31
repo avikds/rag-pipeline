@@ -30,7 +30,7 @@ python scaffold.py
 - [x] **18.** top_k_chunks
 - [x] **19.** retrieve
 - [x] **20.** build_faiss_index
-- [ ] **21.** faiss_search
+- [x] **21.** faiss_search
 - [ ] **22.** compare_faiss_to_numpy
 - [ ] **23.** save_faiss_index
 - [ ] **24.** build_prompt_template
