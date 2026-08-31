@@ -58,7 +58,7 @@ python scaffold.py
 - [x] **46.** relevance_score
 - [x] **47.** handle_no_context
 - [x] **48.** deduplicate_chunks
-- [ ] **49.** cache_query_embedding
+- [x] **49.** cache_query_embedding
 - [ ] **50.** update_chat_memory
 - [ ] **51.** rewrite_followup
 

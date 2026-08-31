@@ -888,8 +888,15 @@ def deduplicate_chunks(chunks, embeddings, similarity_threshold=0.95):
 
     return kept_chunks, embeddings[kept_indices]
 
-# Step 49 - cache_query_embedding (not yet solved)
-# TODO: implement
+# Step 49 - cache_query_embedding
+def cache_query_embedding(query, embed_model, cache):
+    if query in cache:
+        return cache[query]
+
+    embedding = embed_text(embed_model, query)
+    cache[query] = embedding
+
+    return embedding
 
 # Step 50 - update_chat_memory (not yet solved)
 # TODO: implement
