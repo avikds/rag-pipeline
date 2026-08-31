@@ -59,7 +59,7 @@ python scaffold.py
 - [x] **47.** handle_no_context
 - [x] **48.** deduplicate_chunks
 - [x] **49.** cache_query_embedding
-- [ ] **50.** update_chat_memory
+- [x] **50.** update_chat_memory
 - [ ] **51.** rewrite_followup
 
 ---
