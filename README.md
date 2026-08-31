@@ -48,7 +48,7 @@ python scaffold.py
 - [x] **36.** bm25_search
 - [x] **37.** hybrid_search
 - [x] **38.** rerank_cross_encoder
-- [ ] **39.** maximal_marginal_relevance
+- [x] **39.** maximal_marginal_relevance
 - [ ] **40.** filter_by_metadata
 - [ ] **41.** build_eval_set
 - [ ] **42.** hit_rate_at_k

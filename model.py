@@ -627,8 +627,78 @@ def rerank_cross_encoder(query, candidate_chunks, cross_encoder):
 
     return [chunk for chunk, score in ranked]
 
-# Step 39 - maximal_marginal_relevance (not yet solved)
-# TODO: implement
+# Step 39 - maximal_marginal_relevance
+def maximal_marginal_relevance(
+    query_embedding,
+    candidate_embeddings,
+    k=5,
+    lambda_param=0.5,
+):
+    import numpy as np
+
+    candidate_embeddings = np.asarray(candidate_embeddings, dtype=float)
+    query_embedding = np.asarray(query_embedding, dtype=float)
+
+    n = len(candidate_embeddings)
+    if n == 0 or k <= 0:
+        return []
+
+    k = min(k, n)
+
+    # Cosine relevance to the query.
+    query_norm = np.linalg.norm(query_embedding)
+    candidate_norms = np.linalg.norm(candidate_embeddings, axis=1)
+
+    safe_query_norm = query_norm if query_norm != 0 else 1.0
+    safe_candidate_norms = np.where(candidate_norms == 0, 1.0, candidate_norms)
+
+    relevance = (
+        candidate_embeddings @ query_embedding
+    ) / (safe_candidate_norms * safe_query_norm)
+
+    # Pairwise cosine similarity between candidates.
+    pairwise_similarity = (
+        candidate_embeddings @ candidate_embeddings.T
+    ) / (
+        safe_candidate_norms[:, None]
+        * safe_candidate_norms[None, :]
+    )
+
+    selected = []
+    remaining = set(range(n))
+
+    for _ in range(k):
+        best_idx = None
+        best_score = -np.inf
+
+        for idx in remaining:
+            if not selected:
+                diversity_similarity = 0.0
+            else:
+                diversity_similarity = max(
+                    pairwise_similarity[idx, selected]
+                )
+
+            mmr_score = (
+                lambda_param * relevance[idx]
+                - (1.0 - lambda_param) * diversity_similarity
+            )
+
+            # Prefer the smaller index when scores tie.
+            if (
+                mmr_score > best_score
+                or (
+                    np.isclose(mmr_score, best_score)
+                    and (best_idx is None or idx < best_idx)
+                )
+            ):
+                best_score = mmr_score
+                best_idx = idx
+
+        selected.append(best_idx)
+        remaining.remove(best_idx)
+
+    return selected
 
 # Step 40 - filter_by_metadata (not yet solved)
 # TODO: implement
