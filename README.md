@@ -24,7 +24,7 @@ python scaffold.py
 - [x] **12.** embed_text
 - [x] **13.** embed_chunks
 - [x] **14.** l2_normalize
-- [ ] **15.** save_corpus
+- [x] **15.** save_corpus
 - [ ] **16.** cosine_similarity_search
 - [ ] **17.** top_k_indices
 - [ ] **18.** top_k_chunks
