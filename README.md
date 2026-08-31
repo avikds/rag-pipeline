@@ -43,7 +43,7 @@ python scaffold.py
 - [x] **31.** track_source_chunk_ids
 - [x] **32.** append_source_references
 - [x] **33.** query_rewrite
-- [ ] **34.** hyde_retrieve
+- [x] **34.** hyde_retrieve
 - [ ] **35.** reciprocal_rank_fusion
 - [ ] **36.** bm25_search
 - [ ] **37.** hybrid_search

@@ -477,8 +477,18 @@ def query_rewrite(raw_query):
 
     return query
 
-# Step 34 - hyde_retrieve (not yet solved)
-# TODO: implement
+# Step 34 - hyde_retrieve
+def hyde_retrieve(query, hypothetical_answer, chunks, embeddings, embed_model, k=5):
+    # Embed the hypothetical answer instead of the original query.
+    hypothetical_vector = embed_text(embed_model, hypothetical_answer)
+
+    # Score the hypothetical answer against all chunk embeddings.
+    scores = cosine_similarity_search(hypothetical_vector, embeddings)
+
+    # Select the top-k chunks in descending similarity order.
+    indices = top_k_indices(scores, k)
+
+    return [chunks[i] for i in indices]
 
 # Step 35 - reciprocal_rank_fusion (not yet solved)
 # TODO: implement
