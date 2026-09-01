@@ -62,22 +62,6 @@ python scaffold.py
 - [x] **50.** update_chat_memory
 - [x] **51.** rewrite_followup
 
-## Results
+---
 
-```
-[corpus] 4 docs, first preview: 'The Eiffel Tower is a wrought-iron lattice tower located in '
-[chunks] produced 7 chunks
-[embeddings] shape=(7, 384), dtype=float32
-[query] raw='What is RAG?' clean='what is rag'
-  retrieved score=0.06864069402217865 text='les.'
-  retrieved score=0.05888683348894119 text=' glucose and oxygen.'
-  retrieved score=0.03712339326739311 text='Python is a high-level programming language known for its re'
-[faiss] top ids=[np.float32(0.06864069), np.float32(0.058886852), np.float32(0.03712337)] scores=[4.0, 2.0, 5.0]
-[bm25] 3 hits
-[hybrid] 3 hits
-[answer] ' factors factors factors factors factors factors factors factors factors factors factors factors factors factors factors'
-[cited] ' factors factors factors factors factors factors factors factors factors factors factors factors factors factors factors factors factors factors factors factors'
-[eval] hit@3=0.00 recall@3=0.00 mrr=0.00
-[quality] faithfulness=0.00 relevance=0.00
-[followup] standalone='what is rag And what about its main benefits?'
-```
+Built on Deep-ML.
